@@ -125,7 +125,7 @@
           };   
     var myOSM;
     myOSM = L.tileLayer('http://ajax.pirates.42monkeys.co.uk/osm_tiles/{z}/{x}/{y}.png', 
-	{
+	  {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     });
     var pirateOceanBackdrop;
@@ -134,21 +134,37 @@
         attribution: '&copy; <a href="http://www.naturalearthdata.com">Natural Earth</a>'
     });    
     var baseMaps = {"myOSM": myOSM, "Pirate Oceans": pirateOceanBackdrop };
-    var portsGeoJson = L.geoJson(ports, {
-        icon: function(feature) {
-            switch (feature.properties.nation) {
-                case 'English': return {color: "#ff0000"};
-                case 'Spanish':   return {color: "#FFF200"};
-                case 'Dutch': return {color: "#00FFDD"};
-                case 'French':   return {color: "#2A00FF"};            
-            }
-        }
+
+    debugger;
+
+    function portColour(nation){
+      switch (nation) {
+        case 'English': return "#ff0000";
+        case 'Spanish': return "#FFF200";
+        case 'Dutch': return "#00FFDD";
+        case 'French': return "#2A00FF";            
+      }
+    }
+
+    var portStyle = {        
+        radius: 8,
+        color: "#ff7800",
+        fillColor: "#ff0000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      }
+
+    var portsLayer = L.geoJson(ports, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, portStyle);
+      }
     })    
     var map = L.map('map', 
     {
         center: [18.5, -76.5],
         zoom: 6,
-        layers: [myOSM,  pirateOceanBackdrop, portsGeoJson],
+        layers: [myOSM,  pirateOceanBackdrop, portsLayer],
     });
     var layerControl = L.control;
     layerControl.layers(baseMaps).addTo(map);
