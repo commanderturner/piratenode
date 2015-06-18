@@ -1,0 +1,24 @@
+    <section>
+      <ul class="nav nav-pills">
+        <li ng-class="{ active: tab.isSet(1) }">
+          <a href ng-click="tab.setTab(1)">Map</a></li>
+        <li ng-class="{ active: tab.isSet(2) }">
+          <a href ng-click="tab.setTab(2)">Pirate</a></li>
+        <li ng-class="{ active: tab.isSet(3) }">
+          <a href ng-click="tab.setTab(3)">Ship</a></li>
+        <li ng-class="{ active: tab.isSet(4) }">
+          <a href ng-click="tab.setTab(4)">About</a></li>          
+      </ul>
+      <div ng-show="tab.isSet(1)">
+        <pirate-map></pirate-map>
+      </div>
+      <div ng-show="tab.isSet(2)">
+        <p>Details of your pirate captain, his skills, experiences and fortune will go here</p>
+      </div>
+      <div ng-show="tab.isSet(3)">
+        <p>Details of your ship, crew, weapons, upgrades and state of repair will go here
+      </div>
+      <div ng-show="tab.isSet(4)">
+        {{"I am learning how to set up mapnik on Ubuntu 14.04, set up default OSM styling, set up custom maps for mapnik using Tilemill.  In addtion I will use a pirate and navigation simulator as a way to develop skills in nodejs and angular and host the site on the same server.  Soon I will add a contact form in case you would like any more info and perhaps do a blog to share the resources I have used to learn these skills."}}
+      </div>      
+    </section> 
