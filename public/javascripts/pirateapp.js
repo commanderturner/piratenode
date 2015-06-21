@@ -187,14 +187,8 @@
 
         function onEachFeature(feature, layer) {
             layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomToFeature
+                click: highlightFeature
             });
-        }
-
-        function zoomToFeature(){
-
         }
 
         var map = L.map('map', 
@@ -208,22 +202,22 @@
         pirateOceanBackdrop.bringToFront();
 
         function highlightFeature(e) {
+          $.each(portsLayer.getLayers(),function(index,value){
+              portsLayer.resetStyle(value);
+          })          
           var layer = e.target;
 
           layer.setStyle({
-              weight: 1,
-              color: '#666'
+              weight: 4,
+              color: '#666',
+              fillColor: '#00FF00',
+              radius: 12
           });
 
           if (!L.Browser.ie && !L.Browser.opera) {
               layer.bringToFront();
           }
           info.update(layer.feature.properties);
-        }
-
-        function resetHighlight(e) {
-          portsLayer.resetStyle(e.target);
-          info.update();
         }
 
         var info = L.control();
