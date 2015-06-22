@@ -232,12 +232,23 @@
         info.update = function (props) {
             this._div.innerHTML = '<h4>Port Info</h4>' +  (props ?
                 '<b>' + props.name + '</b><br />' + props.nation 
-                : 'Hover over a port');
+                : 'Click on a port');
         };
 
         info.addTo(map);
 
+        var myMovingMarker = L.Marker.movingMarker([[17.937, -76.841],[16.0101938, -61.7138203]],
+                        [20000]).addTo(map);
 
+        myMovingMarker.on('click', function() {
+            if (myMovingMarker.isRunning()) {
+                myMovingMarker.pause();
+            } else {
+                myMovingMarker.start();
+            }
+        });
+
+        myMovingMarker.start();
 
       },
       controllerAs: 'mapCrtl'
